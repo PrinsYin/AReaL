@@ -18,10 +18,9 @@ TRIAL_NAME = "trial_nccl"
 MODEL_PATH = "/storage/testing/models/Qwen__Qwen3-1.7B/"
 if not os.path.exists(MODEL_PATH):
     MODEL_PATH = "Qwen/Qwen2-0.5B"
-PORT = 13998
-DIST_PORT = 15998
-GROUP_NAME = "test_nccl_group21"
-MASTER_PORT = DIST_PORT + 1
+PORT = 13987
+DIST_PORT = 15987
+MASTER_PORT = 15989
 HOST = network.gethostip()
 RUN_SERVER_TIMEOUT = 180
 
@@ -74,8 +73,6 @@ def test_fsdpengine_nccl_weight_update_to_remote(tmp_path_factory, sglang_server
     os.environ["LOCAL_RANK"] = "0"
     os.environ["MASTER_ADDR"] = HOST
     os.environ["MASTER_PORT"] = str(MASTER_PORT)
-    os.environ["NCCL_P2P_DISABLE"] = "1"
-    os.environ["NCCL_IB_DISABLE"] = "1"
 
     # 启动本地FSDPEngine
     engine_config = TrainEngineConfig(

@@ -379,7 +379,6 @@ class RemoteSGLangEngine(InferenceEngine):
         if meta.type == "nccl":
             if not self.distributed_weight_update_initialized:
                 self._init_distributed_weight_update(meta)
-            print(f"Begin update weights from {meta}")
             try:
                 jobs = [self.update_all_params_for_addr(addr,meta) for addr in self.addresses]
                 loop = asyncio.new_event_loop()
